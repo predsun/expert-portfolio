@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Import premium fonts for professional aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap');
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -43,39 +47,47 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
+  /* Premium Brand Colors */
+  --color-navy: oklch(0.25 0.08 260);
+  --color-charcoal: oklch(0.235 0.015 65);
+  --color-stone-white: oklch(1 0 0);
+  --color-soft-gray: oklch(0.967 0.001 286.375);
+  --color-gold: oklch(0.6 0.08 70);
+  --color-light-gray: oklch(0.92 0.004 286.32);
+
+  --primary: var(--color-navy);
+  --primary-foreground: var(--color-stone-white);
+  --sidebar-primary: var(--color-navy);
+  --sidebar-primary-foreground: var(--color-stone-white);
+  --chart-1: var(--color-navy);
+  --chart-2: var(--color-gold);
+  --chart-3: var(--color-navy);
+  --chart-4: var(--color-charcoal);
+  --chart-5: var(--color-soft-gray);
+  --radius: 0.5rem;
+  --background: var(--color-stone-white);
+  --foreground: var(--color-charcoal);
+  --card: var(--color-stone-white);
+  --card-foreground: var(--color-charcoal);
+  --popover: var(--color-stone-white);
+  --popover-foreground: var(--color-charcoal);
+  --secondary: var(--color-soft-gray);
+  --secondary-foreground: var(--color-charcoal);
+  --muted: var(--color-light-gray);
   --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
+  --accent: var(--color-gold);
+  --accent-foreground: var(--color-charcoal);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --destructive-foreground: var(--color-stone-white);
+  --border: var(--color-light-gray);
+  --input: var(--color-stone-white);
+  --ring: var(--color-navy);
+  --sidebar: var(--color-stone-white);
+  --sidebar-foreground: var(--color-charcoal);
+  --sidebar-accent: var(--color-gold);
+  --sidebar-accent-foreground: var(--color-charcoal);
+  --sidebar-border: var(--color-light-gray);
+  --sidebar-ring: var(--color-navy);
 }
 
 .dark {
@@ -118,7 +130,34 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+  /* Premium typography defaults */
+  h1 {
+    @apply text-5xl font-bold leading-tight tracking-tight;
+    font-family: 'Playfair Display', serif;
+  }
+  h2 {
+    @apply text-4xl font-semibold leading-snug tracking-tight;
+    font-family: 'Playfair Display', serif;
+  }
+  h3 {
+    @apply text-3xl font-semibold leading-snug;
+    font-family: 'Playfair Display', serif;
+  }
+  h4 {
+    @apply text-2xl font-semibold;
+    font-family: 'Playfair Display', serif;
+  }
+  p {
+    @apply text-base leading-relaxed;
+    font-family: 'Inter', sans-serif;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
