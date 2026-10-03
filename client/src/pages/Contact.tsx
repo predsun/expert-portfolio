@@ -12,6 +12,10 @@ export default function Contact() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+
+  // TODO: replace with your real contact email before launch
+  const CONTACT_EMAIL = 'contact@expertportfolio.com';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,13 +27,35 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    console.log('Form submitted:', formData);
+
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const subject = formData.subject.trim();
+    const message = formData.message.trim();
+
+    if (!name || !email || !subject || !message) {
+      setError(language === 'cn' ? '请填写所有必填项。' : 'Please fill in all required fields.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError(language === 'cn' ? '邮箱格式不正确，请检查。' : 'Please enter a valid email address.');
+      return;
+    }
+    setError('');
+
+    // No backend wired up yet: open the visitor's mail client with a
+    // prefilled message as an interim solution.
+    const mailto =
+      `mailto:${CONTACT_EMAIL}` +
+      `?subject=${encodeURIComponent(`[网站留言] ${subject}`)}` +
+      `&body=${encodeURIComponent(`${message}\n\n—— ${name} <${email}>`)}`;
+    window.location.href = mailto;
+
     setSubmitted(true);
     setTimeout(() => {
       setFormData({ name: '', email: '', subject: '', message: '' });
       setSubmitted(false);
-    }, 3000);
+    }, 6000);
   };
 
   return (
@@ -125,8 +151,8 @@ export default function Contact() {
                     </h3>
                     <p className="text-gray-600">
                       {language === 'cn'
-                        ? '我会尽快回复您的消息。'
-                        : 'I will get back to you shortly.'}
+                        ? '已为您打开邮件客户端，请点击发送完成留言，我会尽快回复。'
+                        : 'Your mail client has been opened — hit send to deliver your message. I will get back to you shortly.'}
                     </p>
                   </div>
                 ) : (
@@ -196,6 +222,11 @@ export default function Contact() {
                     </div>
 
                     {/* Submit Button */}
+                    {error && (
+                      <p role="alert" className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                        {error}
+                      </p>
+                    )}
                     <Button
                       type="submit"
                       size="lg"

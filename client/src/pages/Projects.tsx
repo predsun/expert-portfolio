@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight, Building2, Zap, TrendingUp } from 'lucide-react';
 
@@ -245,9 +246,9 @@ export default function Projects() {
               ? '欢迎讨论更多项目细节或探讨合作机遇'
               : 'Welcome to discuss more project details or explore collaboration opportunities'}
           </p>
-          <a href="/contact" className="inline-block px-8 py-3 bg-white text-slate-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+          <Link href="/contact" className="inline-block px-8 py-3 bg-white text-slate-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
             {language === 'cn' ? '联系我' : 'Get in Touch'}
-          </a>
+          </Link>
         </div>
       </section>
     </div>

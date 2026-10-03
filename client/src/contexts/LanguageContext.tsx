@@ -8,6 +8,18 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
+const LANGUAGE_STORAGE_KEY = 'expert-portfolio-language';
+
+function getInitialLanguage(): Language {
+  try {
+    const saved = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    if (saved === 'cn' || saved === 'en') return saved;
+  } catch {
+    // localStorage may be unavailable (private mode, SSR); fall back to default
+  }
+  return 'cn';
+}
+
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 // Translation dictionary
@@ -155,10 +167,18 @@ const translations: Record<Language, Record<string, string>> = {
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('cn');
+  const [language, setLanguage] = useState<Language>(getInitialLanguage);
 
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === 'cn' ? 'en' : 'cn'));
+    setLanguage((prev) => {
+      const next = prev === 'cn' ? 'en' : 'cn';
+      try {
+        window.localStorage.setItem(LANGUAGE_STORAGE_KEY, next);
+      } catch {
+        // ignore storage failures
+      }
+      return next;
+    });
   };
 
   const t = (key: string): string => {
