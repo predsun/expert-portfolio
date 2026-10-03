@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ArrowRight, TrendingUp, Lightbulb, BookOpen } from 'lucide-react';
 
@@ -210,9 +211,9 @@ Finally, the continuity of post-investment management is crucial. We must establ
               ? '欢迎分享您的观点和想法'
               : 'Welcome to share your perspectives and ideas'}
           </p>
-          <a href="/contact" className="inline-block px-8 py-3 bg-white text-slate-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+          <Link href="/contact" className="inline-block px-8 py-3 bg-white text-slate-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
             {language === 'cn' ? '联系我' : 'Get in Touch'}
-          </a>
+          </Link>
         </div>
       </section>
     </div>
